@@ -19,6 +19,15 @@ public class WorkLog {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Date: ").append(date).append('\n');
+        sb.append("Hours worked: ").append(hours).append('\n');
+        sb.append("Description: ").append(description).append('\n');
+        return sb.toString();
+    }
+
 
     public void setDate(int year, int month, int day) {
         this.date = LocalDate.of(year, month, day);
