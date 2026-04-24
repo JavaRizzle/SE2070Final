@@ -3,8 +3,8 @@ import java.util.Scanner;
 /* ArrayList and associate logic for Car and WorkLog objects*/
 public class ShopManager {
     /* declare arraylist fields */
-    ArrayList<Car> cars = new ArrayList<>();
-    ArrayList<WorkLog> log = new ArrayList<>();
+    private ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<WorkLog> log = new ArrayList<>();
 
 
     /*
@@ -26,6 +26,10 @@ public class ShopManager {
             }
         }
     }
+    // return ArrayList cars
+    public ArrayList<Car> getCars() {
+        return cars;
+    }
     /* helper method to return car object from nickname */
     public Car carGet(String nickname) {
         for (Car car: cars) {   // loop through ArrayList cars
@@ -45,10 +49,6 @@ public class ShopManager {
     public void carAdvance(String nickname) {
         carGet(nickname).workStageAdvance();   // use workStageAdvance in class Car
     }
-    /* todo print uncompleted cars*/
-    // loop through cars
-        // check if stage < 4
-            // print .toString() on car
 
 
     /* LOG METHODS */

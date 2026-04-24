@@ -8,21 +8,21 @@ public class Main {
 
         // build menu String
         StringBuilder menu = new StringBuilder();
-        menu.append("\n*** SHOP MANAGER ***\n");
-        menu.append("Cars\n");
+        menu.append("\n=== SHOP MANAGER ===\n");
+        menu.append("\n- Cars -\n");
         menu.append("1. Add a car\n");
         menu.append("2. Delete a car\n");
         menu.append("3. Advance car work stage\n");
         menu.append("4. View all car reports\n");
         menu.append("5. View car report by name\n");
-        menu.append("Work Log\n");
+        menu.append("\n- Work Log -\n");
         menu.append("6. Add a log\n");
         menu.append("7. Delete a log\n");
         menu.append("8. Clear all logs\n");
         menu.append("9. View a log\n");
         menu.append("10. View all logs\n");
         menu.append("11. View total hours worked\n");
-        menu.append("...\nEnter a number 1-11 or 0 to end:");
+        menu.append("\nEnter a number 1-11 or 0 to end:");
 
 
         // menu loop
@@ -32,35 +32,86 @@ public class Main {
             System.out.println(menu);   // give menu
             input = scnr.nextInt();     // get input
             // decision logic
-
             /* add a car */
             if (input == 1) {
                 shop.carAdd(buildCar());
             }
-
-            /* todo delete a car */
+            /* delete a car from nickname*/
             else if (input == 2) {
+                System.out.print("Enter the nickname of the car you'd like to delete (String): ");
+                String nickname = scnr.nextLine();
+                scnr.nextLine();
+                shop.getCars().remove(shop.carGet(nickname));
+                System.out.println(nickname + " removed!\n");
+            }
+            /* advance car work stage from nickname */
+            else if (input == 3) {
+                System.out.print("Enter the nickname of the car you'd like to advance the work stage of (String): ");
+                String nickname = scnr.nextLine();
+                scnr.nextLine();
+                shop.carAdvance(nickname);
+                System.out.println(nickname + " advanced to stage " + shop.carGet(nickname).getNickname());
+            }
+            /* view all car reports */
+            else if (input == 4) {
+                System.out.println("=== All Cars ===");
+                for (Car car : shop.getCars()) {   // loop through cars ArrayList
+                    System.out.println(car.toString());   // print .toString() for each
+                }
+            }
+            /* view car report from nickname */
+            else if (input == 5) {
+                System.out.print("Enter the nickname of the car you'd like to view a report of (String): ");
+                String nickname = scnr.nextLine();
+                // get car, print .toString()
+                Car tempcar = shop.carGet(nickname);
+                System.out.println(tempcar.toString());
             }
 
-            /* todo advance car work stage */
-            else if (input == 3) {}
-            /* todo view all car reports */
-            else if (input == 4) {}
-            /* todo view car report by name */
-            else if (input == 5) {}
-            /* todo add a log */
-            else if (input == 6) {}
-            /* todo delete a log by date */
-            else if (input == 7) {}
-            /* todo clear all logs */
-            else if (input == 8) {}
-            /* todo view a log */
-            else if (input == 9) {}
-            /* todo view all logs */
-            else if (input == 10) {}
-            /* todo view total hours worked */
-            else if (input == 11) {}
-            /* todo exit loop */
+            // *** LOGS ***
+            // add a log
+            else if (input == 6) {
+                // add return object of buildCar() helper to ArrayList cars
+                shop.getCars().add(buildCar());
+            }
+            // delete all logs on input date
+            // use .clearLog(year, month, day) from shopManager
+            else if (input == 7) {
+                System.out.println("What year is the log for? (int): ");
+                int year = scnr.nextInt();
+                System.out.println("What month? (1-12): ");
+                int month = scnr.nextInt();
+                System.out.println("What day? (int): ");
+                int day = scnr.nextInt();
+                shop.clearLog(year, month, day);
+            }
+            // clear all logs
+            else if (input == 8) {
+                shop.clearLog();
+            }
+            // view all logs on a date
+            // get input (year, month, day) -> shop.printLog(input)
+            else if (input == 9) {
+                System.out.println("What year are the log(s) in? (int): ");
+                int year = scnr.nextInt();
+                System.out.println("What month? (1-12): ");
+                int month = scnr.nextInt();
+                System.out.println("What day? (int): ");
+                int day = scnr.nextInt();
+                shop.printLog(year, month, day);
+            }
+            // view all logs
+            else if (input == 10) {
+                System.out.println("=== All Logs ===");
+                shop.printLog();
+            }
+            // view total hours worked
+            // print(shop -> loghours)
+            else if (input == 11) {
+                System.out.println(shop.logHours());
+            }
+
+            // exit loop
             else if (input == 0) {
                 keepGoing = false;
                 System.out.println("Exiting Program...\n");
